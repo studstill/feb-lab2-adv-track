@@ -6,7 +6,7 @@
 2. Go to <a href = "https://github.com/stephanielingwood/feb-lab2-adv-track">https://github.com/stephanielingwood/feb-lab2-adv-track</a> and click on the "Fork" button in the upper right. This will create a new copy of the repo, one that's associated with your account.
 3. Copy the link in the "HTTPS Clone URL" box on the right. Tip: that link should have your username in it, not mine.
 4. Open your terminal and navigate to your projects directory.
-5. Run this: `git clone <i>paste in that url here</i>`
+5. Run this: `git clone paste-in-that-url-here`
 6. `cd feb-lab2-adv-track`
 7. Run `npm install`.
 8. Your assignment is in lab2.js. There are detailed instructions in the
@@ -21,6 +21,7 @@ Upload lab2.js to Canvas.
 
 ##### Option 2
 Submit a link to a pull request. To do this, do the following:
+
 1. Open your terminal and navigate to the feb-lab2-adv-track directory.
 2. Make a new branch and switch to it: `git checkout -b yourBranchNameHere`
 3. Stage all your files for the commit: `git add .`  (Yes, you need that period.)
