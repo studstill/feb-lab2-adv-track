@@ -1,0 +1,15 @@
+{
+  "name": "feb-lab2-adv-track",
+  "version": "0.0.0",
+  "description": "Codefellows Foundations II: Javascript, Lab 2, Advanced Track",
+  "repository" : { "type" : "git",
+    "url" : "https://github.com/stephanielingwood/feb-lab2-adv-track"
+  },
+  "dependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0"
+  },
+  "devDependencies": {
+    "grunt-jscs": "^0.8.1"
+  }
+}
