@@ -53,7 +53,7 @@ var hoursSpentInDowington; // TODO: assign me the value of the
 
 // Now, write a method that takes a population for an arbitrary
 // town, and the starting consumption rate, and returns the number
-// of hours the blob needs to ooze it's way through that town.
+// of hours the blob needs to ooze its way through that town.
 
 function hoursToOoze(population, peoplePerHour) {
   // TODO: implement me based on the instructions above. Be sure to then assign me to the Blob's prototype.
@@ -93,7 +93,7 @@ function sayHello (sb) {
     // to do the translating
 
     //TODO: put this on the SentientBeing prototype
-  };
+  }
 
 // TODO: create three subclasses of SentientBeing, one for each
 // species above (Klingon, Human, Romulan).
@@ -102,7 +102,6 @@ assert((new Human()).sayHello(new Klingon()) === "nuqneH",
   "the klingon should hear nuqneH");
 // TODO: write five more assertions, to complete all the possible
 // greetings between the three types of sentient beings you created above.
-
 
 //*********************************************************
 // PROBLEM 3: Sorting. 20 points.
