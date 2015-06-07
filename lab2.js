@@ -179,14 +179,14 @@ function sumSort(arrayOfArrays) {
   });
 }
 
-// Test Cases:
-var myArray = [1, 2, 3, 4, 5];
+// Test cgruases:
+var myArray = [ 1, 2, 3, 4, 5 ];
 console.log("The sum of myArray is " + sumArray(myArray));
 
 var bigArray = [
-                [1, 2, 3, 4, 5],
-                [1, 2, 3,],
-                [1, 2]
+                [ 1, 2, 3, 4, 5 ],
+                [ 1, 2, 3 ],
+                [ 1, 2 ]
               ];
 
 console.log(bigArray);
