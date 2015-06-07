@@ -39,31 +39,65 @@ function assert(expression, failureMessage) {
         1          |       2/hour
         2          |       3/hour
         3          |       4/hour
-
- TODO: First, make a constructor function, called Blob, that makes blobs.
-
- TODO: Next, create an instance of Blob named blob.
-
- TODO: Then, use a loop to calculate how long it took the blob to finish
- with Dowington.
 */
 
-var hoursSpentInDowington; // TODO: assign me the value of the
-                           // above calculation
+// make a constructor function, called Blob, that makes blobs
+function Blob(name) {
+    this.name = name;
+}
 
-// Now, write a method that takes a population for an arbitrary
-// town, and the starting consumption rate, and returns the number
-// of hours the blob needs to ooze its way through that town.
+// create an instance of Blob named blob
+var blob = new Blob(blob);
+
+// declare variables & initial conditions for calculating the blob takeover
+var pplConsumed =  0;
+var pplRemaining = 1000;
+var rateOfConsumption = 1;
+var hoursSpentInDowington = 0;
+
+// use a loop to calc how long it took blob to finish with Dowington
+// initialize i (hours) to 1
+for (var i = 1, j = rateOfConsumption; pplRemaining > 0 ; i++, j++) {
+  hoursSpentInDowington = i;
+  rateOfConsumption = j;
+  pplRemaining = pplRemaining - rateOfConsumption;
+}
+
+console.log("hoursSpentInDowington is " + hoursSpentInDowington);
+
+ // assign hoursSpentInDowington the value of the above calculation
+ hoursSpentInDowington = 45;
+
+// create a function that takes a population for an arbitrary town,
+// and the starting consumption rate, and returns the number of hours
+// the blob needs to ooze its way through that town
 
 function hoursToOoze(population, peoplePerHour) {
-  // TODO: implement me based on the instructions above. Be sure to then assign me to the Blob's prototype.
+  var hours = 0;
+  var pop = population;
+  var pph = peoplePerHour;
+
+// use a loop to calc how long it took blob to finish with Dowington
+// initialize i (hours) to 1
+  for (var i = 1, j = pph; pop > 0; i++, j++) {
+      pph = j;
+      hours = i;
+      pop -= pph;
+    }
+  console.log("hours is " + hours);
+  return hours;
 }
+
+// create a method, Blob.hoursToOoze, and assign it the above function, hoursToOoze
+Blob.prototype.hoursToOoze = hoursToOoze;
 
 assert(blob.hoursToOoze(0, 1) === 0, "no people means no time needed.");
 assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
   "hoursSpentInDowington should match hoursToOoze\"s result for 1000");
-// TODO: write three more assertions like the two above, testing out
-// the hoursToOoze method.
+assert(blob.hoursToOoze(1000, 0) === 46, "lazy blob takes the 1st hour off.");
+assert(blob.hoursToOoze(5, 5) === 1, "small town + hungry blob === 1 hour.");
+
+assert(blob.hoursToOoze(500000, 1) === 1000, "500,000 takes only 1,000 hrs");
 
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
@@ -75,33 +109,41 @@ var hello = {
   "federation standard": "hello" // home planet is Earth
 };
 
-// TODO: define a constructor that creates objects to represent
-// sentient beings. They have a home planet, a language that they
-// speak, and method called sayHello.
-
-function SentientBeing () {
-  // TODO: specify a home planet and a language
-  // you'll need to add parameters to this constructor
+function SentientBeing (homePlanet, language) {
+  this.homePlanet = homePlanet;
+  this.language = language;
+  this.hello = hello[this.language];
+  this.sayHello = function(sb) {
+    console.log(this.hello);
+    return sb.hello;
+  };
 }
 
-// sb is a SentientBeing object
-function sayHello (sb) {
-    // TODO: say hello prints out (console.log's) hello in the
-    // language of the speaker, but returns it in the language
-    // of the listener (the sb parameter above).
-    // use the 'hello' object at the beginning of this exercise
-    // to do the translating
-
-    //TODO: put this on the SentientBeing prototype
-  }
-
-// TODO: create three subclasses of SentientBeing, one for each
+// Create three subclasses of SentientBeing, one for each
 // species above (Klingon, Human, Romulan).
+var klingon = new SentientBeing('Qo"noS', "klingon");
+var romulan = new SentientBeing("Romulus", "romulan");
+var human = new SentientBeing("Earth", "federation standard");
+
+function Klingon() {}
+function Romulan() {}
+function Human() {}
+Human.prototype = new SentientBeing("Earth", "federation standard");
+Klingon.prototype = new SentientBeing('Qo"noS', "klingon");
+Romulan.prototype = new SentientBeing("Romulus", "romulan");
 
 assert((new Human()).sayHello(new Klingon()) === "nuqneH",
   "the klingon should hear nuqneH");
-// TODO: write five more assertions, to complete all the possible
-// greetings between the three types of sentient beings you created above.
+assert((new Human()).sayHello(new Romulan()) === "Jolan\"tru",
+  "the romulan should hear Jolan\"tru");
+assert((new Romulan()).sayHello(new Klingon()) === "nuqneH",
+  "the klingon should hear nuqneH");
+assert((new Romulan()).sayHello(new Human()) === "hello",
+  "the human should hear hello");
+assert((new Klingon()).sayHello(new Romulan()) === "Jolan\"tru",
+  "the romulan should hear Jolan\"tru");
+assert((new Klingon()).sayHello(new Human()) === "hello",
+  "the human should hear hello");
 
 //*********************************************************
 // PROBLEM 3: Sorting. 20 points.
@@ -110,27 +152,47 @@ assert((new Human()).sayHello(new Klingon()) === "nuqneH",
 // assertions for each one
 //*********************************************************
 function lastLetterSort(stringArray) {
-  function byLastLetter(array) {
-    //TODO: implement me. sort the strings in alphabetical
-    // order using their last letter
-    // read this: http://www.w3schools.com/jsref/jsref_sort.asp
+
+  function byLastLetter(a, b) {
+
+    var lastCharA = a.charAt(a.length - 1).toLowerCase();
+    var lastCharB = b.charAt(b.length - 1).toLowerCase();
+
+    console.log(lastCharA.charCodeAt(0));
+    console.log(lastCharB.charCodeAt(0));
+    return lastCharA.charCodeAt(0) - lastCharB.charCodeAt(0);
   }
-  stringArray.sort(byLastLetter);
+  return stringArray.sort(byLastLetter);
 }
 
 function sumArray(numberArray) {
   var sum = 0;
-  // TODO: implement me using forEach
+  numberArray.forEach(function(currentValue, index, arrary) {
+    sum += currentValue;
+  });
   return sum;
 }
 
 function sumSort(arrayOfArrays) {
-  arrayOfArrays.sort(function(item) {
-    // TODO: implement me using sumArray
-    //  order the arrays based on the sum of the numbers
-    //  inside each array
+  arrayOfArrays.sort(function(arrayA, arrayB) {
+    return sumArray(arrayA) - sumArray(arrayB);
   });
 }
+
+// Test Cases:
+var myArray = [1, 2, 3, 4, 5];
+console.log("The sum of myArray is " + sumArray(myArray));
+
+var bigArray = [
+                [1, 2, 3, 4, 5],
+                [1, 2, 3,],
+                [1, 2]
+              ];
+
+console.log(bigArray);
+
+sumSort(bigArray);
+console.log(bigArray);
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
